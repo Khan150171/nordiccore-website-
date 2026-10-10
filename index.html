@@ -329,6 +329,31 @@
   .btn-glow svg{transition:transform .2s ease;}
   .btn-glow:hover svg{transform:translateX(3px);}
 
+  /* ---------- contact form ---------- */
+  .contact-form{display:flex;flex-direction:column;gap:13px;margin-bottom:6px;}
+  .form-field{display:flex;flex-direction:column;gap:6px;}
+  .form-field label{font-family:"IBM Plex Mono";font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--hero-steel);}
+  .form-field input,.form-field textarea{
+    font-family:"IBM Plex Sans", system-ui, sans-serif;font-size:14px;color:var(--hero-ink);
+    background:color-mix(in srgb, var(--hero-bg) 65%, transparent);
+    border:1px solid var(--hero-line);border-radius:6px;padding:10px 12px;
+    resize:vertical;transition:border-color .15s, box-shadow .15s;
+  }
+  .form-field input::placeholder,.form-field textarea::placeholder{color:color-mix(in srgb, var(--hero-steel) 65%, transparent);}
+  .form-field input:focus,.form-field textarea:focus{
+    outline:none;border-color:var(--hero-teal);
+    box-shadow:0 0 0 3px color-mix(in srgb, var(--hero-teal) 22%, transparent);
+  }
+  .form-field textarea{min-height:84px;}
+  .form-honey{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;}
+  .form-submit[data-busy="true"]{opacity:.65;pointer-events:none;}
+  .form-status{font-family:"IBM Plex Mono";font-size:12.5px;line-height:1.5;border-radius:6px;padding:10px 12px;display:none;}
+  .form-status.show{display:block;}
+  .form-status.ok{color:var(--hero-teal);border:1px solid color-mix(in srgb, var(--hero-teal) 40%, transparent);background:color-mix(in srgb, var(--hero-teal) 10%, transparent);}
+  .form-status.err{color:var(--hero-amber);border:1px solid color-mix(in srgb, var(--hero-amber) 45%, transparent);background:color-mix(in srgb, var(--hero-amber) 10%, transparent);}
+  .contact-divider{display:flex;align-items:center;gap:10px;margin:18px 0 14px;font-family:"IBM Plex Mono";font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--hero-steel);}
+  .contact-divider::before,.contact-divider::after{content:"";flex:1;height:1px;background:var(--hero-line);}
+
   /* ---------- footer (part of the closing dark band) ---------- */
   footer{padding-block:32px;padding-bottom:calc(32px + env(safe-area-inset-bottom,0px));position:relative;z-index:1;}
   .footer-inner{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--hero-steel);}
@@ -610,12 +635,42 @@
         <p class="contact-copy" style="margin-top:14px;">Ready to scale your engineering pipeline? Contact our delivery lead directly — we'll scope the work and propose the right specialists from our network.</p>
       </div>
       <div class="contact-card">
+        <form class="contact-form" id="contact-form" action="https://formsubmit.co/ajax/nordiccoreit@hotmail.com" method="POST">
+          <input type="text" name="_honey" class="form-honey" tabindex="-1" autocomplete="off">
+          <input type="hidden" name="_subject" value="New enquiry via nordiccoreit.se">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+          <div class="form-field">
+            <label for="cf-name">Name</label>
+            <input id="cf-name" type="text" name="name" placeholder="Your name" required>
+          </div>
+          <div class="form-field">
+            <label for="cf-email">Email</label>
+            <input id="cf-email" type="email" name="email" placeholder="you@company.com" required>
+          </div>
+          <div class="form-field">
+            <label for="cf-company">Company <span style="opacity:.65;text-transform:none;letter-spacing:0;">(optional)</span></label>
+            <input id="cf-company" type="text" name="company" placeholder="Company name">
+          </div>
+          <div class="form-field">
+            <label for="cf-message">What do you need?</label>
+            <textarea id="cf-message" name="message" placeholder="Tell us about the engagement — scope, timeline, skills needed…" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-glow form-submit" id="form-submit-btn" style="width:100%;justify-content:center;">
+            <span id="form-submit-label">Send message</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+          </button>
+          <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
+        </form>
+
+        <div class="contact-divider">or</div>
+
         <div class="contact-email-row">
           <span id="email-text">nordiccoreit@hotmail.com</span>
           <button class="copy-btn" id="copy-email" type="button">Copy</button>
         </div>
-        <a href="mailto:nordiccoreit@hotmail.com" class="btn btn-glow" style="width:100%;justify-content:center;margin-bottom:10px;">Start a project <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
-        <div class="contact-meta">Based in Västernorrland, Sweden · engagements delivered remotely across the Nordics and beyond</div>
+        <a href="mailto:nordiccoreit@hotmail.com" class="btn btn-outline" style="width:100%;justify-content:center;">Email us directly</a>
+        <div class="contact-meta" style="margin-top:12px;">Based in Västernorrland, Sweden · engagements delivered remotely across the Nordics and beyond</div>
       </div>
     </div>
   </div>
@@ -652,6 +707,53 @@
         sel.removeAllRanges(); sel.addRange(range);
         mark();
       }
+    });
+  })();
+
+  (function(){
+    var form = document.getElementById('contact-form');
+    var statusBox = document.getElementById('form-status');
+    var submitBtn = document.getElementById('form-submit-btn');
+    var submitLabel = document.getElementById('form-submit-label');
+
+    function showStatus(kind, message){
+      statusBox.textContent = message;
+      statusBox.className = 'form-status show ' + kind;
+    }
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      submitBtn.dataset.busy = 'true';
+      submitLabel.textContent = 'Sending…';
+      statusBox.className = 'form-status';
+
+      var data = new FormData(form);
+      // Honeypot: if filled, a bot submitted — pretend success, send nothing.
+      if (data.get('_honey')) {
+        submitLabel.textContent = 'Send message';
+        delete submitBtn.dataset.busy;
+        showStatus('ok', "Thanks — we'll be in touch shortly.");
+        form.reset();
+        return;
+      }
+
+      fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      }).then(function(res){
+        if (res.ok) {
+          showStatus('ok', "Thanks — your message is on its way. We'll reply within one business day.");
+          form.reset();
+        } else {
+          showStatus('err', 'Something went wrong on our end. Please email us directly at nordiccoreit@hotmail.com instead.');
+        }
+      }).catch(function(){
+        showStatus('err', "Couldn't send that — please email us directly at nordiccoreit@hotmail.com instead.");
+      }).finally(function(){
+        submitLabel.textContent = 'Send message';
+        delete submitBtn.dataset.busy;
+      });
     });
   })();
 
