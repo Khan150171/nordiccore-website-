@@ -12,14 +12,14 @@
 <style>
 :root{
   --bg:#F7F4EB; --surface:#FFFFFF; --ink:#16241F; --muted:#5C6B61;
-  --primary:#1F4B3E; --primary-ink:#F7F4EB; --gold:#B9872E; --gold-soft:#E7D4A8;
+  --primary:#1F4B3E; --primary-soft:#2E6650; --primary-ink:#F7F4EB; --gold:#B9872E; --gold-soft:#E7D4A8;
   --line:#E2DDC8; --teal-soft:#D6E7E1; --coral-soft:#F3DCD2;
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
     --bg:#0E1E19; --surface:#15291F; --ink:#F2EFE2; --muted:#A9B6A9;
-    --primary:#4C8E6D; --primary-ink:#0E1E19; --gold:#D9A545; --gold-soft:#4A3A1C;
+    --primary:#4C8E6D; --primary-soft:#3C7159; --primary-ink:#0E1E19; --gold:#D9A545; --gold-soft:#4A3A1C;
     --line:#223A30; --teal-soft:#1C332C; --coral-soft:#3A271E;
     color-scheme: dark;
   }
@@ -28,7 +28,7 @@
 body{margin:0;background:var(--bg);color:var(--ink);font-family:'Manrope',system-ui,sans-serif;}
 img{max-width:100%;}
 a{color:inherit;text-decoration:none;}
-h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:-0.01em;margin:0;}
+h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:-0.01em;margin:0;text-wrap:balance;}
 .eyebrow{font-size:13px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin:0 0 12px;}
 .wrap{max-width:1180px;margin:0 auto;padding-left:max(20px, env(safe-area-inset-left,0px));padding-right:max(20px, env(safe-area-inset-right,0px));}
 .btn{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:15px;padding:14px 26px;border-radius:999px;border:1.5px solid transparent;cursor:pointer;}
@@ -38,8 +38,10 @@ h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:-0.
 .logo-word b{color:var(--primary);font-weight:700;}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:18px;}
 .icon-badge{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex:none;}
-.step-num{width:34px;height:34px;border-radius:50%;background:var(--primary);color:var(--primary-ink);font-family:'Fraunces',serif;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;flex:none;}
+.step-num{width:34px;height:34px;border-radius:50%;background:var(--primary);color:var(--primary-ink);font-family:'Fraunces',serif;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;flex:none;position:relative;z-index:2;}
+.step-line{position:absolute;top:17px;left:0;right:0;height:1px;background:repeating-linear-gradient(to right, var(--line) 0 8px, transparent 8px 14px);z-index:1;}
 .grid-auto{display:grid;grid-template-columns:repeat(auto-fit, minmax(250px,1fr));gap:18px;}
+.trust-item{display:flex;align-items:center;gap:12px;}
 </style>
 </head>
 <body>
@@ -56,15 +58,88 @@ h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:-0.
   </div>
 </header>
 
-<section style="padding-block:80px 64px;">
-  <div class="wrap">
-    <p class="eyebrow">Website-Bau für kleine &amp; mittlere Unternehmen</p>
-    <h1 style="font-size:clamp(32px,4.4vw,54px);line-height:1.08;max-width:17ch;margin-bottom:18px;">Eine Website, die für Ihr Geschäft arbeitet.</h1>
-    <p style="font-size:17px;line-height:1.65;color:var(--muted);max-width:56ch;margin:0 0 30px;">Von der ersten Idee bis zur fertigen, individuell gestalteten Website – inklusive Online-Terminbuchung, Bestellsystemen oder Warenkorb, wo Ihr Geschäft das braucht. Für Kunden in Deutschland und Schweden.</p>
-    <div style="display:flex;gap:14px;flex-wrap:wrap;">
-      <a href="#kontakt" class="btn btn-primary">Angebot anfordern</a>
-      <a href="#referenzen" class="btn btn-ghost">Referenzen ansehen</a>
+<section style="padding-block:72px 56px;">
+  <div class="wrap" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(320px,1fr));gap:40px;align-items:center;">
+
+    <div>
+      <p class="eyebrow">Website-Bau für kleine &amp; mittlere Unternehmen</p>
+      <h1 style="font-size:clamp(32px,4.4vw,54px);line-height:1.08;max-width:17ch;margin-bottom:18px;">Eine Website, die für Ihr Geschäft arbeitet.</h1>
+      <p style="font-size:17px;line-height:1.65;color:var(--muted);max-width:56ch;margin:0 0 30px;">Von der ersten Idee bis zur fertigen, individuell gestalteten Website – inklusive Online-Terminbuchung, Bestellsystemen oder Warenkorb, wo Ihr Geschäft das braucht. Für Kunden in Deutschland und Schweden.</p>
+      <div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:34px;">
+        <a href="#kontakt" class="btn btn-primary">Angebot anfordern</a>
+        <a href="#referenzen" class="btn btn-ghost">Referenzen ansehen</a>
+      </div>
+      <div style="display:flex;gap:26px;flex-wrap:wrap;">
+        <div class="trust-item">
+          <div class="icon-badge" style="width:32px;height:32px;border-radius:9px;background:var(--gold-soft);">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7" stroke="#7A5A1E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </div>
+          <span style="font-size:13px;font-weight:700;color:var(--muted);">Fester Preis</span>
+        </div>
+        <div class="trust-item">
+          <div class="icon-badge" style="width:32px;height:32px;border-radius:9px;background:var(--teal-soft);">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7" stroke="#2A5C49" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </div>
+          <span style="font-size:13px;font-weight:700;color:var(--muted);">Kein Vorwissen nötig</span>
+        </div>
+        <div class="trust-item">
+          <div class="icon-badge" style="width:32px;height:32px;border-radius:9px;background:var(--coral-soft);">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7" stroke="#9A4A32" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </div>
+          <span style="font-size:13px;font-weight:700;color:var(--muted);">Echte Referenzen</span>
+        </div>
+      </div>
     </div>
+
+    <div style="min-width:0;">
+      <figure style="margin:0;">
+        <svg viewBox="0 0 520 420" style="width:100%;max-width:520px;height:auto;display:block;margin:0 auto;" role="img" aria-label="Illustration: eine Website-Vorschau schwebt vor einer stilisierten nordischen Hügellandschaft mit Wald und Sonne">
+          <circle cx="412" cy="78" r="44" style="fill:var(--gold);opacity:0.85"></circle>
+          <g style="stroke:var(--gold);opacity:0.4;stroke-width:3;stroke-linecap:round">
+            <line x1="412" y1="12" x2="412" y2="2"></line>
+            <line x1="462" y1="36" x2="470" y2="28"></line>
+            <line x1="476" y1="78" x2="486" y2="78"></line>
+          </g>
+          <path d="M0,300 Q120,240 260,290 T520,270 L520,420 L0,420 Z" style="fill:var(--primary-soft);opacity:0.55"></path>
+          <path d="M0,340 Q140,280 280,330 T520,310 L520,420 L0,420 Z" style="fill:var(--primary);opacity:0.9"></path>
+          <g style="fill:var(--ink);opacity:0.85">
+            <polygon points="46,352 58,352 52,330"></polygon>
+            <polygon points="40,360 64,360 52,340"></polygon>
+            <rect x="50" y="360" width="4" height="10"></rect>
+            <polygon points="96,358 106,358 101,340"></polygon>
+            <polygon points="91,365 111,365 101,348"></polygon>
+            <rect x="99" y="365" width="4" height="9"></rect>
+            <polygon points="458,352 470,352 464,330"></polygon>
+            <polygon points="452,360 476,360 464,340"></polygon>
+            <rect x="462" y="360" width="4" height="10"></rect>
+          </g>
+          <g>
+            <circle cx="420" cy="170" r="24" style="fill:var(--surface);stroke:var(--line);stroke-width:1.5"></circle>
+            <rect x="408" y="162" width="24" height="18" rx="3" style="fill:none;stroke:var(--gold);stroke-width:1.8"></rect>
+            <line x1="408" y1="168" x2="432" y2="168" style="stroke:var(--gold);stroke-width:1.8"></line>
+            <circle cx="60" cy="300" r="22" style="fill:var(--surface);stroke:var(--line);stroke-width:1.5"></circle>
+            <path d="M51,296h18l-2,14a2,2 0 01-2,1.6H55a2,2 0 01-2-1.6z" style="fill:none;stroke:var(--gold);stroke-width:1.6"></path>
+            <line x1="420" y1="192" x2="380" y2="230" style="stroke:var(--line);stroke-width:1.5;stroke-dasharray:3 4"></line>
+            <line x1="60" y1="280" x2="100" y2="250" style="stroke:var(--line);stroke-width:1.5;stroke-dasharray:3 4"></line>
+          </g>
+          <rect x="80" y="130" width="300" height="200" rx="14" style="fill:var(--surface);stroke:var(--line);stroke-width:1.5"></rect>
+          <rect x="80" y="130" width="300" height="30" rx="14" style="fill:var(--bg)"></rect>
+          <circle cx="98" cy="145" r="4.5" style="fill:var(--coral-soft)"></circle>
+          <circle cx="113" cy="145" r="4.5" style="fill:var(--gold-soft)"></circle>
+          <circle cx="128" cy="145" r="4.5" style="fill:var(--teal-soft)"></circle>
+          <rect x="150" y="140" width="190" height="10" rx="5" style="fill:var(--line)"></rect>
+          <rect x="100" y="176" width="150" height="16" rx="4" style="fill:var(--ink);opacity:0.85"></rect>
+          <rect x="100" y="200" width="110" height="8" rx="3" style="fill:var(--muted);opacity:0.5"></rect>
+          <rect x="100" y="214" width="90" height="8" rx="3" style="fill:var(--muted);opacity:0.5"></rect>
+          <rect x="100" y="236" width="76" height="30" rx="8" style="fill:var(--primary)"></rect>
+          <rect x="186" y="236" width="76" height="30" rx="8" style="fill:none;stroke:var(--line);stroke-width:1.5"></rect>
+          <rect x="100" y="282" width="80" height="34" rx="8" style="fill:var(--teal-soft)"></rect>
+          <rect x="188" y="282" width="80" height="34" rx="8" style="fill:var(--coral-soft)"></rect>
+          <rect x="276" y="282" width="80" height="34" rx="8" style="fill:var(--gold-soft)"></rect>
+        </svg>
+      </figure>
+    </div>
+
   </div>
 </section>
 
@@ -133,18 +208,53 @@ h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:-0.
     <p style="font-size:15px;color:var(--muted);max-width:60ch;margin:0 0 30px;">Zwei Beispiele aus unterschiedlichen Branchen – von der Kursanmeldung bis zum Bestellsystem.</p>
     <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(300px,1fr));gap:20px;">
 
-      <div class="card" style="padding:26px;">
-        <p class="eyebrow" style="color:var(--primary);">Gesundheit &amp; Schulung</p>
-        <h3 style="font-size:20px;margin-bottom:8px;">Apollon Active</h3>
-        <p style="font-size:14px;color:var(--muted);line-height:1.6;margin:0 0 16px;">Website-Relaunch für einen Erste-Hilfe-Kurs-Anbieter aus Düsseldorf/NRW – eigenes Branding, Kursübersicht und Anmeldung, weg vom alten Strato-Hosting.</p>
-        <a href="https://khan150171.github.io/apollon-active-website/" class="btn btn-ghost" style="padding:10px 20px;font-size:13.5px;">Live ansehen</a>
+      <div class="card" style="padding:0;overflow:hidden;">
+        <div style="padding:22px 22px 0;">
+          <svg viewBox="0 0 320 150" style="width:100%;height:auto;display:block;" role="img" aria-label="Vereinfachte Vorschau der Apollon-Active-Website mit Kursübersicht und Anmeldung">
+            <rect x="0" y="0" width="320" height="150" rx="12" style="fill:var(--bg)"></rect>
+            <rect x="0" y="0" width="320" height="24" rx="12" style="fill:var(--surface)"></rect>
+            <circle cx="16" cy="12" r="3.5" style="fill:var(--coral-soft)"></circle>
+            <circle cx="27" cy="12" r="3.5" style="fill:var(--gold-soft)"></circle>
+            <circle cx="38" cy="12" r="3.5" style="fill:var(--teal-soft)"></circle>
+            <rect x="18" y="36" width="130" height="12" rx="3" style="fill:var(--ink);opacity:0.8"></rect>
+            <rect x="18" y="54" width="90" height="7" rx="3" style="fill:var(--muted);opacity:0.5"></rect>
+            <rect x="18" y="78" width="130" height="56" rx="8" style="fill:var(--teal-soft)"></rect>
+            <rect x="158" y="78" width="144" height="24" rx="6" style="fill:var(--surface);stroke:var(--line);stroke-width:1.2"></rect>
+            <rect x="158" y="110" width="144" height="24" rx="6" style="fill:var(--primary)"></rect>
+            <path d="M48,100l8,8 14-16" style="fill:none;stroke:var(--primary);stroke-width:3;stroke-linecap:round;stroke-linejoin:round"></path>
+          </svg>
+        </div>
+        <div style="padding:20px 26px 26px;">
+          <p class="eyebrow" style="color:var(--primary);">Gesundheit &amp; Schulung</p>
+          <h3 style="font-size:20px;margin-bottom:8px;">Apollon Active</h3>
+          <p style="font-size:14px;color:var(--muted);line-height:1.6;margin:0 0 16px;">Website-Relaunch für einen Erste-Hilfe-Kurs-Anbieter aus Düsseldorf/NRW – eigenes Branding, Kursübersicht und Anmeldung, weg vom alten Strato-Hosting.</p>
+          <a href="https://khan150171.github.io/apollon-active-website/" class="btn btn-ghost" style="padding:10px 20px;font-size:13.5px;">Live ansehen</a>
+        </div>
       </div>
 
-      <div class="card" style="padding:26px;">
-        <p class="eyebrow" style="color:var(--primary);">Gastronomie</p>
-        <h3 style="font-size:20px;margin-bottom:8px;">Tandoori Diner</h3>
-        <p style="font-size:14px;color:var(--muted);line-height:1.6;margin:0 0 16px;">Website mit digitaler Speisekarte, Warenkorb und Bestellung per WhatsApp für ein Restaurant in Düsseldorf – provisionsfrei, im eigenen Branding.</p>
-        <a href="https://claude.ai/artifact/P4XtYF9eb8f9xatMzyXTXS" class="btn btn-ghost" style="padding:10px 20px;font-size:13.5px;">Live ansehen</a>
+      <div class="card" style="padding:0;overflow:hidden;">
+        <div style="padding:22px 22px 0;">
+          <svg viewBox="0 0 320 150" style="width:100%;height:auto;display:block;" role="img" aria-label="Vereinfachte Vorschau der Tandoori-Diner-Website mit Speisekarte und Warenkorb">
+            <rect x="0" y="0" width="320" height="150" rx="12" style="fill:var(--bg)"></rect>
+            <rect x="0" y="0" width="320" height="24" rx="12" style="fill:var(--surface)"></rect>
+            <circle cx="16" cy="12" r="3.5" style="fill:var(--coral-soft)"></circle>
+            <circle cx="27" cy="12" r="3.5" style="fill:var(--gold-soft)"></circle>
+            <circle cx="38" cy="12" r="3.5" style="fill:var(--teal-soft)"></circle>
+            <rect x="18" y="36" width="130" height="12" rx="3" style="fill:var(--ink);opacity:0.8"></rect>
+            <rect x="18" y="54" width="90" height="7" rx="3" style="fill:var(--muted);opacity:0.5"></rect>
+            <rect x="18" y="78" width="88" height="56" rx="8" style="fill:var(--coral-soft)"></rect>
+            <rect x="116" y="78" width="88" height="56" rx="8" style="fill:var(--gold-soft)"></rect>
+            <rect x="214" y="78" width="88" height="56" rx="8" style="fill:var(--teal-soft)"></rect>
+            <circle cx="286" cy="38" r="15" style="fill:var(--primary)"></circle>
+            <path d="M280,36h10l-1,8a1.3,1.3 0 01-1.3,1h-5.4a1.3,1.3 0 01-1.3-1z" style="fill:none;stroke:var(--primary-ink);stroke-width:1.4"></path>
+          </svg>
+        </div>
+        <div style="padding:20px 26px 26px;">
+          <p class="eyebrow" style="color:var(--primary);">Gastronomie</p>
+          <h3 style="font-size:20px;margin-bottom:8px;">Tandoori Diner</h3>
+          <p style="font-size:14px;color:var(--muted);line-height:1.6;margin:0 0 16px;">Website mit digitaler Speisekarte, Warenkorb und Bestellung per WhatsApp für ein Restaurant in Düsseldorf – provisionsfrei, im eigenen Branding.</p>
+          <a href="https://claude.ai/artifact/P4XtYF9eb8f9xatMzyXTXS" class="btn btn-ghost" style="padding:10px 20px;font-size:13.5px;">Live ansehen</a>
+        </div>
       </div>
 
     </div>
@@ -158,6 +268,9 @@ h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:-0.
     <div class="grid-auto" style="grid-template-columns:repeat(auto-fit, minmax(260px,1fr));">
 
       <div class="card" style="padding:28px;">
+        <div class="icon-badge" style="margin-bottom:16px;background:var(--gold-soft);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2" stroke="#7A5A1E" stroke-width="1.7"></rect><line x1="8" y1="9" x2="16" y2="9" stroke="#7A5A1E" stroke-width="1.7"></line><line x1="8" y1="13" x2="16" y2="13" stroke="#7A5A1E" stroke-width="1.7"></line></svg>
+        </div>
         <p class="eyebrow">Basis</p>
         <h3 style="font-size:19px;margin-bottom:10px;">Online-Visitenkarte</h3>
         <p style="font-size:13.5px;color:var(--muted);line-height:1.6;margin:0;">Einseitige, individuell gestaltete Website mit Kontakt, Leistungen und Ihrer Marke.</p>
@@ -165,12 +278,18 @@ h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:-0.
 
       <div class="card" style="padding:28px;border:2px solid var(--primary);position:relative;">
         <span style="position:absolute;top:-13px;left:24px;background:var(--primary);color:var(--primary-ink);font-size:11px;font-weight:800;letter-spacing:0.04em;padding:4px 12px;border-radius:999px;">BELIEBT</span>
+        <div class="icon-badge" style="margin-top:8px;margin-bottom:16px;background:var(--teal-soft);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1.5" stroke="#2A5C49" stroke-width="1.6"></rect><rect x="13" y="4" width="7" height="7" rx="1.5" stroke="#2A5C49" stroke-width="1.6"></rect><rect x="4" y="13" width="7" height="7" rx="1.5" stroke="#2A5C49" stroke-width="1.6"></rect><rect x="13" y="13" width="7" height="7" rx="1.5" stroke="#2A5C49" stroke-width="1.6"></rect></svg>
+        </div>
         <p class="eyebrow">Plus</p>
-        <h3 style="font-size:19px;margin-bottom:10px;margin-top:8px;">Mehrseitige Website</h3>
+        <h3 style="font-size:19px;margin-bottom:10px;">Mehrseitige Website</h3>
         <p style="font-size:13.5px;color:var(--muted);line-height:1.6;margin:0;">Mehrere Unterseiten, Terminbuchung oder Kursanmeldung, Mehrsprachigkeit auf Wunsch.</p>
       </div>
 
       <div class="card" style="padding:28px;">
+        <div class="icon-badge" style="margin-bottom:16px;background:var(--coral-soft);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 8h16l-1.5 11a2 2 0 01-2 1.7H7.5a2 2 0 01-2-1.7L4 8z" stroke="#9A4A32" stroke-width="1.6"></path><path d="M8 8V6a4 4 0 018 0v2" stroke="#9A4A32" stroke-width="1.6"></path></svg>
+        </div>
         <p class="eyebrow">Premium</p>
         <h3 style="font-size:19px;margin-bottom:10px;">Shop &amp; Bestellsystem</h3>
         <p style="font-size:13.5px;color:var(--muted);line-height:1.6;margin:0;">Warenkorb, Online-Bestellung und Zahlung, inklusive laufender Pflege.</p>
@@ -185,7 +304,8 @@ h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:-0.
   <div class="wrap">
     <p class="eyebrow">Ablauf</p>
     <h2 style="font-size:clamp(26px,3vw,36px);margin-bottom:34px;max-width:20ch;">In vier Schritten zur fertigen Website.</h2>
-    <div class="grid-auto" style="grid-template-columns:repeat(auto-fit, minmax(220px,1fr));">
+    <div class="grid-auto" style="grid-template-columns:repeat(auto-fit, minmax(220px,1fr));position:relative;">
+      <div class="step-line"></div>
       <div style="display:flex;flex-direction:column;gap:12px;">
         <div class="step-num">1</div>
         <h3 style="font-size:16.5px;">Erstgespräch</h3>
@@ -218,8 +338,14 @@ h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:-0.
   </div>
 </section>
 
-<footer style="background:var(--ink);color:var(--bg);">
-  <div class="wrap" style="padding-block:36px 24px;">
+<div style="background:var(--bg);line-height:0;">
+  <svg viewBox="0 0 1200 70" preserveAspectRatio="none" style="width:100%;height:60px;display:block;" role="presentation" aria-hidden="true">
+    <path d="M0,70 L0,40 Q150,10 300,36 T600,28 T900,38 T1200,20 L1200,70 Z" style="fill:var(--ink)"></path>
+  </svg>
+</div>
+
+<footer style="background:var(--ink);color:var(--bg);margin-top:-1px;">
+  <div class="wrap" style="padding-block:28px 24px;">
     <div style="display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:20px;">
       <span style="font-family:'Fraunces',serif;font-weight:600;font-size:16px;color:var(--bg);">NordicCore IT Consulting</span>
       <div style="font-size:12px;opacity:0.6;align-self:center;">Website-Bau für Deutschland &amp; Schweden</div>
